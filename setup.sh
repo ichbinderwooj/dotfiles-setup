@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Backup configuration files
-mv $HOME/.bashrc $HOME.bashrc.BACKUP
-mv $HOME/.config $HOME.config.BACKUP
+mv $HOME/.bashrc $HOME/.bashrc.BACKUP
+mv $HOME/.config $HOME/.config.BACKUP
 
 # Install packages for configuration
 sudo pacman -Sy --needed --noconfirm git wget sudo
@@ -17,7 +17,7 @@ git --git-dir=$HOME/.dotfiles --work-tree=$HOME pull origin main
 sudo wget https://raw.githubusercontent.com/jluttine/rofi-power-menu/master/rofi-power-menu -O /usr/local/bin/rofi-power-menu
 
 # Install packages
-sudo pacman -S --needed --noconfirm xorg-server lightdm lightdm-slick-greeter bspwm sxhkd kitty polybar picom rofi feh maim materia-gtk-theme papirus-gtk-theme
+sudo pacman -S --needed --noconfirm xorg-server lightdm lightdm-slick-greeter bspwm sxhkd kitty polybar picom rofi feh maim materia-gtk-theme papirus-icon-theme
 
 # LightDM configuration
 sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-slick-greeter/' /etc/lightdm/lightdm.conf
