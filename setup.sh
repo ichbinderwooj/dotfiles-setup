@@ -15,9 +15,29 @@ git --git-dir=$HOME/.dotfiles --work-tree=$HOME pull origin main
 
 # Install jluttine/rofi-power-menu
 sudo wget https://raw.githubusercontent.com/jluttine/rofi-power-menu/master/rofi-power-menu -O /usr/local/bin/rofi-power-menu
+sudo chmod +x /usr/local/bin/rofi-power-menu
+
+# Install material icons
+mkdir $HOME/.fonts
+wget https://raw.githubusercontent.com/google/material-design-icons/master/font/MaterialIcons-Regular.ttf -O $HOME/.fonts/MaterialIcons-Regular.ttf
 
 # Install packages
 sudo pacman -S --needed --noconfirm xorg-server lightdm lightdm-slick-greeter bspwm sxhkd kitty polybar picom rofi feh maim materia-gtk-theme papirus-icon-theme
+
+# Install drivers
+lspci -k | grep -A 2 -E "(VGA|3D)" | grep NVIDIA
+if [ $? -eq 0 ];
+then
+  pacman -Qqe linux-lts
+  if [ $? -eq 1 ];
+  then
+    sudo pacman -S nvidia
+  else
+    sudo pacman -S nvidia-lts
+  fi
+  sudo sed -i 's/kms//' /etc/mkinitcpio.conf
+  sudo mkinitcpio -P
+fi
 
 # LightDM configuration
 sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-slick-greeter/' /etc/lightdm/lightdm.conf
