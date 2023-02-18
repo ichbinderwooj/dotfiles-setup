@@ -3,7 +3,7 @@
 # Backup configuration files
 mv $HOME/.bashrc $HOME/.bashrc.BACKUP
 mv $HOME/.config $HOME/.config.BACKUP
-
+mv $HOME/.gtkrc-2.0 $HOME/.gtkrc-2.0.BACKUP
 # Install packages for configuration
 sudo pacman -Sy --needed --noconfirm git wget sudo
 
