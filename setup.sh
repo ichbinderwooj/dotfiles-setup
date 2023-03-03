@@ -22,7 +22,7 @@ mkdir $HOME/.fonts
 wget https://raw.githubusercontent.com/google/material-design-icons/master/font/MaterialIcons-Regular.ttf -O $HOME/.fonts/MaterialIcons-Regular.ttf
 
 # Install packages
-sudo pacman -S --needed --noconfirm xorg-server lightdm lightdm-slick-greeter bspwm sxhkd kitty polybar picom rofi feh maim materia-gtk-theme papirus-icon-theme ttf-liberation ttf-liberation-mono-nerd adobe-source-han-sans-kr-fonts xdotool
+sudo pacman -S --needed --noconfirm xorg-server xorg-xprop xorg-xrandr lightdm lightdm-slick-greeter bspwm sxhkd kitty polybar picom rofi feh maim materia-gtk-theme papirus-icon-theme ttf-liberation ttf-liberation-mono-nerd adobe-source-han-sans-kr-fonts xdotool lxsession thunar gvfs
 
 # Install drivers
 lspci -k | grep -A 2 -E "(VGA|3D)" | grep NVIDIA
@@ -31,9 +31,9 @@ then
   pacman -Qqe linux-lts
   if [ $? -eq 1 ];
   then
-    sudo pacman -S nvidia
+    sudo pacman -S --needed --noconfirm nvidia
   else
-    sudo pacman -S nvidia-lts
+    sudo pacman -S --needed --noconfirm nvidia-lts
   fi
   sudo sed -i 's/kms//' /etc/mkinitcpio.conf
   sudo mkinitcpio -P
